@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends 'book_app/base.html' %}
+{% block body_block %}
+    <!-- <form action="{% url 'search_results' %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form> -->
+    <h1>Search Results</h1>
+
+<ul>
+  {% for city in object_list %}
+    <li>
+      <a href="{% url 'book_details' city.slug %}" >{{city.title }}</a>, <a href="{% url 'genre' city.genre %}">{{ city.genre }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

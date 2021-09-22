@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'book_app/base.html' %}
+{% block body_block %}
+    <div class="blog-table">
+        <h2><a href="{% url 'create_books' %}">&#9997 New Post</a></h2>
+        <h2><a href="{% url 'create_genre' %}">&#9997 Create New Genre</a></h2>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            {% for book in books %}
+            <tr>
+                
+                    <td>{{book.title}}</td>
+                    <td><a class='btn btn-primary' href="{% url 'update_books' book.pk %}">&#9998 Edit</a></td>
+                    <td><a class="btn btn-danger" href="{% url 'delete_books' book.pk %}">&#128465 Delete</a></td>
+            </tr>
+            {% endfor %}
+           
+        </table>
+    </div>
+{% endblock %}

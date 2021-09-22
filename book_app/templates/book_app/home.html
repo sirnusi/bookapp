@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends 'book_app/base.html' %}
+{% load static %}
+{% block body_block %}
+<!-- <div class="blog-item">
+    <h2><a href="#">12 Gift ideas for Christmas</a></h2>
+    <div class="info">
+        By <span><a href="#">Jason Bateman</a></span> | In <span><a href="#">Holidays</a></span> | On <span>8 January 2018</span> | &#x1f441 <span>325 Views</span> 
+    </div>
+    <p>
+        {{ data }}
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, et doloremque. Rem molestiae similique fugiat non, dolore labore accusantium officia tempora? Laborum optio itaque temporibus perferendis debitis. Vero, aperiam? Officia, dolor error nisi corporis harum....
+    </p>
+</div> -->
+{% for book in books %}
+    <div class="card" style="width: 18rem; margin: 10px 5px 5px 5px; ">
+        <img src="{{ book.image.url }}" class="card-img-top" alt="NO">
+        <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <div class="info">
+                By <span><a href="">{{ book.author }}</a></span> | In <span><a href="{% url 'genre' book.genre %}">{{ book.genre }}</a></span> | On <span>{{ book.release_year }}</span> | &#x1f441 <span>{{ book.count }} View{{ book.count | pluralize }}</span> 
+            </div>
+            <p class="card-text">{{ book.content | truncatewords:15 | safe }}</p>
+            <a href="{% url 'book_details' book.slug %}" class="btn btn-primary">Read More...</a>
+        </div>    
+    </div>
+
+{% empty %}
+    <h3>There are no books, <a href="#">please write a book</a></h3>
+{% endfor %}
+
+{% include 'book_app/pagination.html' %}
+
+{% endblock %}
