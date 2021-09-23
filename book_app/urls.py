@@ -16,4 +16,5 @@ urlpatterns = [
     path('create_genre/', views.CreateGenre.as_view(), name='create_genre'),
     path('register_user/', views.UserRegistration.as_view(), name='register_user'),
     path('search_results/', views.SearchResultsView.as_view(), name='search_results'),
+    path('send_email/', views.sendMail, name='send_email'),
 ]

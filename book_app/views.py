@@ -1,10 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from .models import Genre, Book
-from .forms import BookForm, GenreForm, RegisterUser
+from .forms import BookForm, GenreForm, RegisterUser, EmailForm
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import render
 # Create your views here.
 
 class HomeView(LoginRequiredMixin, ListView):
@@ -77,3 +80,23 @@ class SearchResultsView(LoginRequiredMixin, ListView):
         query = self.request.GET.get('q')
         object_list = Book.objects.filter(Q(title__contains=query), author=self.request.user)
         return object_list
+
+def sendMail(request): 
+    form = EmailForm()
+    messageSent = False
+    
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        messageSent = False
+        
+        if form.is_valid():
+            cd = form.cleaned_data
+            subject = 'Sending an email with Django'
+            message = cd['message']
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [cd['recipient']])
+            messageSent = True
+        else:
+            form = EmailForm()
+            
+    return render(request, 'book_app/send_email.html', {'form': form,'messageSent': messageSent})
+        

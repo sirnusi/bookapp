@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends 'book_app/base.html' %}
+{% block body_block %}
+    {% if messageSent %}
+        <h3><strong>Email successfully sent</strong></h3>
+        <p>Your message was successfully sent to {{ form.cleaned_data.to }}</p>
+    {% else %}
+        <h3><strong>Send Email</strong></h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-secondary" value="Send Email">
+        </form>
+    {% endif %}
+{% endblock %}
