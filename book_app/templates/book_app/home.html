@@ -13,7 +13,7 @@
     </p>
 </div> -->
 {% for book in books %}
-    <div class="card" style="width: 18rem; margin: 10px 5px 5px 5px; ">
+    <div class="card" style="width: 18rem; margin: 10px 5px 5px 5px; float: left; ">
         <img src="{{ book.image.url }}" class="card-img-top" alt="NO">
         <div class="card-body">
             <h5 class="card-title">{{ book.title }}</h5>
@@ -28,7 +28,5 @@
 {% empty %}
     <h3>There are no books, <a href="#">please write a book</a></h3>
 {% endfor %}
-
-{% include 'book_app/pagination.html' %}
 
 {% endblock %}
