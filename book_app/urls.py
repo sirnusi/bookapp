@@ -18,3 +18,4 @@ urlpatterns = [
     path('search_results/', views.SearchResultsView.as_view(), name='search_results'),
     path('send_email/', views.sendMail, name='send_email'),
 ]
+
