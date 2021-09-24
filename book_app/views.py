@@ -87,7 +87,6 @@ def sendMail(request):
     
     if request.method == 'POST':
         form = EmailForm(request.POST)
-        messageSent = False
         
         if form.is_valid():
             cd = form.cleaned_data
