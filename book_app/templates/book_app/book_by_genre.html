@@ -7,7 +7,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ book.title }}</h5>
             <div class="info">
-                By <span><a href="#">{{ book.author }}</a></span> | In <span><a href="{% url 'genre' book.genre %}">{{ book.genre }}</a></span> | On <span>{{ book.release_year }}</span> | &#x1f441 <span>{{ book.count }} View{{ book.count | pluralize }}</span> 
+                By <span>{{ book.author }}</span> | In <span><a href="{% url 'genre' book.genre %}">{{ book.genre }}</a></span> | On <span>{{ book.release_year }}</span> | &#x1f441 <span>{{ book.count }} View{{ book.count | pluralize }}</span> 
             </div>
             <p class="card-text">{{ book.content | truncatewords:15 | safe }}</p>
             <a href="{% url 'book_details' book.slug %}" class="btn btn-primary">Read More...</a>

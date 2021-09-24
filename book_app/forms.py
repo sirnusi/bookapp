@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms.widgets import Textarea
 from .models import Book, Genre
 from django.core.exceptions import ValidationError
 
@@ -23,5 +24,6 @@ class RegisterUser(UserCreationForm):
 
 class EmailForm(forms.Form):
     recipient = forms.EmailField()
-    message = forms.CharField(widget=forms.Textarea)
+    message = forms.CharField(widget=forms.Textarea(attrs={'size': 40}))
+        
     
