@@ -11,7 +11,9 @@
 			{% endfor %}
 		</ul>
 	{% else %}
-		<h3>You forgot to search</h3>
+		<li class="nav-item">
+        	<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    	</li>
 	{% endif %}
 {% endblock %}
 
