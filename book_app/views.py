@@ -72,15 +72,21 @@ class UserRegistration(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'book_app/signup.html'
 
-class SearchResultsView(LoginRequiredMixin, ListView):
+class SearchResultsView(ListView):
     model = Book
     template_name = 'book_app/search_results.html'
     
     def get_queryset(self):
-        query = self.request.GET.get('q')
-        object_list = Book.objects.filter(Q(title__contains=query), author=self.request.user)
+        self.query = self.request.GET.get('q')
+        object_list = Book.objects.filter(Q(title__contains=self.query))
         return object_list
-
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.query
+        return context
+        
+    
 def sendMail(request): 
     form = EmailForm()
     messageSent = False
