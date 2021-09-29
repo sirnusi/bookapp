@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import Textarea
-from .models import Book, Genre
-from django.core.exceptions import ValidationError
+from .models import Book, Genre, CommentBook
+
 
 class BookForm(forms.ModelForm):
     class Meta:
@@ -26,4 +26,9 @@ class EmailForm(forms.Form):
     recipient = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea(attrs={'size': 40}))
         
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = CommentBook
+        fields = ['name', 'comment']
     
