@@ -35,7 +35,7 @@ class Book(models.Model):
 
 class CommentBook(models.Model):
     name = models.CharField(max_length=100)
-    comment = models.TextField(related_name='comments')
+    comment = models.TextField()
     
     def __str__(self):
         return self.name

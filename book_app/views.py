@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
-from .models import Genre, Book
-from .forms import BookForm, GenreForm, RegisterUser, EmailForm
+from .models import Genre, Book, CommentBook
+from .forms import BookForm, GenreForm, RegisterUser, EmailForm, CommentForm
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
@@ -123,4 +123,13 @@ def sendMail(request):
             
             
     return render(request, 'book_app/send_email.html', {'form': form,'messageSent': messageSent})
+
+
+class CommentView(CreateView):
+    model = CommentBook
+    form_class = CommentForm
+    
+    
+    def form_valid(self, form):
         
+        return super().form_valid(form)
