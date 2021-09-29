@@ -127,9 +127,13 @@ def sendMail(request):
 
 class CommentView(CreateView):
     model = CommentBook
+    template_name = 'book_app/commentbook_form.html'
     form_class = CommentForm
     
     
     def form_valid(self, form):
-        
+        book_id = self.kwargs.get('id')
+        book = get_object_or_404(Book, id=book_id)
+        self.success_url = f'book_app/book_details/{book.slug}/'
+        form.instance.book = book
         return super().form_valid(form)

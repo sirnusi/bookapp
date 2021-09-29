@@ -36,6 +36,9 @@ class Book(models.Model):
 class CommentBook(models.Model):
     name = models.CharField(max_length=100)
     comment = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
+    book = models.ForeignKey(Book, related_name='comments', on_delete=models.CASCADE, null=True)
+    
     
     def __str__(self):
         return self.name
