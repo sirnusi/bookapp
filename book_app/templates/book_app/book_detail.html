@@ -19,29 +19,5 @@
         </div>
         </div>
     </div>
-    <div class="post-comments">
-        <header>
-          <h3 class="h6">Comment{{book.comments.count | pluralize }}<span class="no-of-comments">({{book.comments.count}})</span></h3>
-        </header>
-        {% for comment in book.comments.all %}
-
-        <div class="comment">
-          
-          <div class="comment-header d-flex justify-content-between">
-            <div class="user d-flex align-items-center">
-              
-              
-              <div class="title"><strong>{{ comment.name }}</strong> <span class="fa fa-date">{{ comment.created_on | timesince }} ago</span></div>
-            </div>
-          </div>
-          <div class="comment-body">
-            <p>{{ comment.comment }}</p>
-          </div>
-          {% empty %}
-            <h1>There are no comments yet!</h1>
-          {% endfor %}
-          <a href="{% url 'comment_books' book.id %}">New Comment</a>
-        </div>
-       
-      </div>
+   
 {% endblock %}

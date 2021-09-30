@@ -4,7 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    
     path('', views.HomeView.as_view(), name='home'),
     path('book_details/<slug:slug>/', views.BookDetailView.as_view(), name='book_details'),
     path('create_books/', views.BookCreateView.as_view(), name='create_books'),
@@ -18,6 +17,5 @@ urlpatterns = [
     path('register_user/', views.UserRegistration.as_view(), name='register_user'),
     path('search_results/', views.SearchResultsView.as_view(), name='search_results'),
     path('send_email/', views.sendMail, name='send_email'),
-    path('comment/<int:id>/', views.CommentView.as_view(), name='comment_books'),
 ]
 

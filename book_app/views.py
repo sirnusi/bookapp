@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.core.mail import send_mail
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 # Create your views here.
 
 
@@ -39,6 +39,10 @@ class BookDetailView(LoginRequiredMixin, DetailView):
         return object
     
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = CommentBook.objects.filter(book=self.get_object())
+        return context
 class BookCreateView(LoginRequiredMixin, CreateView):
     model = Book
     form_class = BookForm
@@ -121,19 +125,5 @@ def sendMail(request):
         else:
             form = EmailForm()
             
-            
+
     return render(request, 'book_app/send_email.html', {'form': form,'messageSent': messageSent})
-
-
-class CommentView(CreateView):
-    model = CommentBook
-    template_name = 'book_app/commentbook_form.html'
-    form_class = CommentForm
-    
-    
-    def form_valid(self, form):
-        book_id = self.kwargs.get('id')
-        book = get_object_or_404(Book, id=book_id)
-        self.success_url = f'book_app/book_details/{book.slug}/'
-        form.instance.book = book
-        return super().form_valid(form)

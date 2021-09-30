@@ -31,4 +31,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = CommentBook
         fields = ['name', 'comment']
+        widgets = {
+            'name': forms.TextInput(attrs={"class": "col-sm-12"}),
+            'comment': forms.Textarea(attrs={'class': 'form-control'})
+        }
     
