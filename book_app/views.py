@@ -39,12 +39,18 @@ class BookDetailView(LoginRequiredMixin, DetailView):
         object.save()
         return object
     
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['comments'] = CommentBook.objects.filter(book=self.get_object())
-        context['form'] = CommentForm
-        return context
+class CommentView(LoginRequiredMixin, CreateView):
+    model = CommentBook
+    form_class = CommentForm
+
+    def form_valid(self, form):
+        book_id = self.kwargs.get('id')
+        book = get_object_or_404(Book, id=book_id)
+        self.success_url = f'/book_app/book_details/{book.slug}/'
+        form.instance.book = book
+        return super().form_valid(form)
+
+
 
     
 class BookCreateView(LoginRequiredMixin, CreateView):

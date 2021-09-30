@@ -19,23 +19,31 @@
         </div>
         </div>
     </div>
-    <form action="" method="POST">    
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit">
-    </form>
-    <div class="comment-list">
-        {% for cmt in comments %}
-            <div class="comment">
-                <div class="info">
-                    <p><strong>{{ cmt.name }}</strong> <span>{{ cmt.created_on }}</span></p>
-                    <p>{{ cmt.comment }}</p>
+
+    <div class="post-comments">
+        <header>
+          <h3 class="h6">Comment{{book.comments.count | pluralize }}<span class="no-of-comments">({{book.comments.count}})</span></h3>
+        </header>
+        {% for comment in book.comments.all %}
+
+        <div class="comment">
+            <div class="comment-header d-flex justify-content-between">
+                <div class="user d-flex align-items-center">
+                    <div class="title"><strong>{{ comment.name }}</strong> <span class="date">{{ comment.created_on | timesince }} ago</span></div>
                 </div>
             </div>
+            <div class="comment-body">
+                <p>{{ comment.comment }}</p>
+            </div>
         {% empty %}
-            <h3>There are no comments yet!</h3>
+            <h1>There are no comments yet!</h1>
         {% endfor %}
-        
+          
+        </div>
+        <a href="{% url 'new_comment' object.id %}">New Comment</a>
+      </div>
+      <!-- End Comment -->
+     
+      
     </div>
-   
 {% endblock %}
