@@ -19,5 +19,23 @@
         </div>
         </div>
     </div>
+    <form action="" method="POST">    
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+    <div class="comment-list">
+        {% for cmt in comments %}
+            <div class="comment">
+                <div class="info">
+                    <p><strong>{{ cmt.name }}</strong> <span>{{ cmt.created_on }}</span></p>
+                    <p>{{ cmt.comment }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <h3>There are no comments yet!</h3>
+        {% endfor %}
+        
+    </div>
    
 {% endblock %}

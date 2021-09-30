@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, FormView
+from django.views.generic.edit import FormView
 from .models import Genre, Book, CommentBook
 from .forms import BookForm, GenreForm, RegisterUser, EmailForm, CommentForm
 from django.urls import reverse_lazy
@@ -42,7 +43,10 @@ class BookDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comments'] = CommentBook.objects.filter(book=self.get_object())
+        context['form'] = CommentForm
         return context
+
+    
 class BookCreateView(LoginRequiredMixin, CreateView):
     model = Book
     form_class = BookForm
