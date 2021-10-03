@@ -1,6 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, FormView
-from django.views.generic.edit import FormView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from .models import Genre, Book, CommentBook
 from .forms import BookForm, GenreForm, RegisterUser, EmailForm, CommentForm
 from django.urls import reverse_lazy
@@ -8,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.core.mail import send_mail
 from django.conf import settings
-from django.shortcuts import render, reverse
+from django.shortcuts import render
 # Create your views here.
 
 
