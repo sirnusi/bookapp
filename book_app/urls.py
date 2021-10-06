@@ -18,5 +18,9 @@ urlpatterns = [
     path('search_results/', views.SearchResultsView.as_view(), name='search_results'),
     path('send_email/', views.sendMail, name='send_email'),
     path('comments/<int:id>/', views.CommentView.as_view(), name='new_comment'),
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name='book_app/password_reset_form.html'), name='password_reset'),
+    path('reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='book_app/password_reset_done.html'), name='password_reset_done'),
+    path('reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='book_app/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='book_app/password_reset_complete.html'), name='password_reset_complete'),
 ]
 
