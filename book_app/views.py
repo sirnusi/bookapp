@@ -31,7 +31,6 @@ class Dashboard(LoginRequiredMixin, View):
 class BookDetailView(LoginRequiredMixin, DetailView):
     model = Book
     
-    
     def get_object(self):
         object = super().get_object()
         object.count += 1
@@ -48,9 +47,6 @@ class CommentView(LoginRequiredMixin, CreateView):
         self.success_url = f'/book_app/book_details/{book.slug}/'
         form.instance.book = book
         return super().form_valid(form)
-
-
-
     
 class BookCreateView(LoginRequiredMixin, CreateView):
     model = Book
